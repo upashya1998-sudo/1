@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root { color-scheme: dark; --leather: #211c19; --paper: #e8ddbb; --ink: #30291f; --gold: #b79a59; --brown: #79664f; }
+:root { color-scheme: dark; --leather: #211c19; --paper: #e8ddbb; --ink: #30291f; --gold: #b79a59; --brown: #79664f; --grain-image: url('/textures/grain.svg'); --leather-image: url('/textures/leather.svg'); }
+html[data-github-pages="true"] { --grain-image: url('/1/textures/grain.svg'); --leather-image: url('/1/textures/leather.svg'); }
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; }
 body { background: #15120f; color: var(--gold); font-family: "EB Garamond", Georgia, serif; }

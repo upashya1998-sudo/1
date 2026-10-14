@@ -1,5 +1,5 @@
 .reading-room { min-height: 100svh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; isolation: isolate; padding: 26px 20px 20px; background: radial-gradient(ellipse at 50% 38%, #30261b80 0, #1c171280 38%, #100e0c 85%), #15120f; }
-.room-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/textures/grain.svg'); opacity: .14; mix-blend-mode: soft-light; }
+.room-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--grain-image); opacity: .14; mix-blend-mode: soft-light; }
 .reading-room::after { content: ''; position: absolute; width: 78%; height: 13%; bottom: 14%; background: #000; filter: blur(35px); border-radius: 50%; opacity: .5; z-index: -1; }
 .room-heading { display: flex; align-items: center; gap: 15px; margin-bottom: 17px; }
 .room-heading p { margin: 0; color: #a49474; font-size: 10px; letter-spacing: 3.1px; }
@@ -28,8 +28,8 @@
 .book-page { width: 100%; height: 100%; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased; }
 .hard-page { border-radius: 2px 5px 5px 2px; box-shadow: 4px 0 0 #a4946d, 7px 1px 0 #504538, 10px 3px 0 #211c19, 0 0 2px #000; }
 .leather-cover { width: 100%; height: 100%; color: #bca064; position: relative; overflow: hidden; background-color: #211c19; background-image: radial-gradient(ellipse at 45% 28%, #40372b50, #14121040 82%); border: 1px solid #57452a; box-shadow: inset 0 0 0 4px #181613, inset 5px 0 13px #000c, inset -1px 1px 2px #b3956050, inset 0 0 25px #04030290; }
-.leather-cover::before { content: ''; position: absolute; inset: 0; background: url('/textures/leather.svg'); mix-blend-mode: soft-light; opacity: .34; pointer-events: none; }
-.leather-cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; border: 7px solid transparent; border-image: url('/textures/grain.svg') 8 round; opacity: .42; box-shadow: inset 0 0 15px #bcb09115; }
+.leather-cover::before { content: ''; position: absolute; inset: 0; background: var(--leather-image); mix-blend-mode: soft-light; opacity: .34; pointer-events: none; }
+.leather-cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; border: 7px solid transparent; border-image: var(--grain-image) 8 round; opacity: .42; box-shadow: inset 0 0 15px #bcb09115; }
 .cover-filigree { width: 100%; height: 100%; position: absolute; inset: 0; opacity: .87; filter: drop-shadow(0 1px 0 #000) drop-shadow(0 -.3px 0 #e8d7a644); }
 .cover-spine { width: 16px; position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, #080706, #30291f 44%, #16130f 90%); box-shadow: 2px 0 4px #0008; z-index: 2; display: flex; flex-direction: column; justify-content: space-evenly; }
 .cover-spine i { height: 4px; background: #645333; box-shadow: 0 1px 1px #000, 0 -1px 1px #9c825550; border-top: 1px solid #ab915745; border-bottom: 1px solid #080705; }
@@ -48,7 +48,7 @@
 .loading-cover { width: min(350px, calc(100vw - 48px)); height: min(511px, calc((100vw - 48px) * 1.46)); box-shadow: 0 24px 30px #0009; --page-w: 350px; }
 .paper-page { color: var(--ink); background-color: var(--paper); background-image: radial-gradient(ellipse at 20% 90%, #b8975020, transparent 48%), radial-gradient(ellipse at 90% 10%, #b5954225, transparent 55%), linear-gradient(90deg, #d6c59630, #f5ecc650 10%, #e8ddbb00 50%, #c3b07c35); border-top: 1px solid #cfbd92; border-bottom: 1px solid #af9a6c; box-shadow: inset 0 0 14px #94744325; }
 .paper-page::after { content: ''; position: absolute; inset: 1px 0; box-shadow: inset 0 0 0 1px #b8a57928, inset 0 0 9px #b2a17e50; pointer-events: none; }
-.paper-grain { position: absolute; inset: 0; background: url('/textures/grain.svg'); opacity: .26; mix-blend-mode: multiply; pointer-events: none; }
+.paper-grain { position: absolute; inset: 0; background: var(--grain-image); opacity: .26; mix-blend-mode: multiply; pointer-events: none; }
 .paper-inner { position: relative; height: 100%; padding: 0 36px; }
 .gutter-shade { position: absolute; top: 0; bottom: 0; width: 29px; pointer-events: none; z-index: 5; }
 .page-left .gutter-shade { right: 0; background: linear-gradient(90deg, transparent, #9d825519 37%, #6d512839 77%, #33261b58); }

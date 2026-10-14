@@ -9,7 +9,11 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:3005. For a production build, use `npm run build` and then `npm start`. Port 3005 keeps the book separate from other projects using port 3000.
+Open http://127.0.0.1:3005. `npm run build` creates a static export in `out`. Port 3005 keeps the book separate from other projects using port 3000.
+
+## GitHub Pages
+
+This repository is configured for a static export at `https://upashya1998-sudo.github.io/1/`. Run `npm run build:pages` to build the site with the `/1` project path and copy the generated files into the repository root. In GitHub, choose **Settings → Pages → Deploy from a branch → `main` → `/(root)` → Save**. After Pages finishes publishing, open the URL above. Repeat `npm run build:pages` and push the changed files whenever you update the app.
 
 ## Reading
 
