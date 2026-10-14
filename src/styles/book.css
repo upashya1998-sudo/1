@@ -12,6 +12,8 @@
 .icon-control:hover { color: #e3c98a; }
 .icon-control:disabled { opacity: .32; }
 .sound-control { justify-self: end; }
+.toolbar-right { justify-self: end; display: flex; align-items: center; gap: 8px; }
+.toolbar-right .motion-control { display: flex; width: auto; padding: 0 3px; font-size: 12px; white-space: nowrap; }
 .language-selector { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .language-selector button { border: 0; color: #93816a; font-size: 14px; background: none; padding: 5px 0; position: relative; white-space: nowrap; transition: color .2s; }
 .language-selector button[lang='ur'] { font-family: 'Noto Nastaliq Urdu', serif; font-size: 12px; line-height: 2.5; padding-top: 0; }

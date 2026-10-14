@@ -37,7 +37,17 @@ export default function Book() {
   const pageRef = useRef(0);
   const languageRef = useRef<Language>("ur");
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const reducedMotion = useReducedMotion();
+  const systemReducedMotion = useReducedMotion();
+  const [motionOverride, setMotionOverride] = useState<boolean | null>(null);
+  const reducedMotion = motionOverride ?? !!systemReducedMotion;
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem("ishq-book-motion") === "animate") setMotionOverride(false);
+    } catch {
+      // Keep the device preference when storage is unavailable.
+    }
+  }, []);
 
   const applyLayout = useCallback((size: BookDimensions, nextLanguage: Language) => {
     const previous = layoutRef.current;
@@ -110,6 +120,16 @@ export default function Book() {
     applyLayout(layout.size, next);
   };
 
+  const toggleMotion = () => {
+    if (reducedMotion) {
+      setMotionOverride(false);
+      try { window.localStorage.setItem("ishq-book-motion", "animate"); } catch { /* Storage is optional. */ }
+      return;
+    }
+    setMotionOverride(null);
+    try { window.localStorage.removeItem("ishq-book-motion"); } catch { /* Storage is optional. */ }
+  };
+
   const onChapter = (id: string) => {
     const index = layoutRef.current?.leaves.findIndex(leaf => leaf.kind === "chapter" && leaf.chapter?.id === id) ?? -1;
     if (index >= 0) goTo(index);
@@ -150,7 +170,7 @@ export default function Book() {
     <div className="room-grain" aria-hidden="true" />
     <header className="room-heading"><span className="heading-diamond" aria-hidden="true" /><p>THE SEVEN STAGES OF LOVE</p><span className="heading-diamond" aria-hidden="true" /></header>
     <div className="reader-shell" style={layout ? { maxWidth: portrait ? layout.size.width : layout.size.width * 2 } : undefined}>
-      <BookToolbar language={language} onLanguage={onLanguage} onContents={() => goTo(3)} onClose={() => goTo(0)} closed={closed} turning={turning} soundAvailable={soundAvailable} soundOn={soundOn} onSound={() => setSoundOn(value => !value)} />
+      <BookToolbar language={language} onLanguage={onLanguage} onContents={() => goTo(3)} onClose={() => goTo(0)} closed={closed} turning={turning} soundAvailable={soundAvailable} soundOn={soundOn} onSound={() => setSoundOn(value => !value)} systemReducedMotion={!!systemReducedMotion} reducedMotion={reducedMotion} onMotion={toggleMotion} />
       <div role="group" className={`book-stage ${portrait ? "stage-portrait" : "stage-landscape"}`} aria-label="Interactive antique poetry book" aria-describedby="reading-instructions">
         {layout ? <motion.div className="book-object" animate={{ x: stageOffset }} initial={false} transition={{ duration: reducedMotion ? 0 : .9, ease: [.22, .61, .36, 1] }} onMouseDownCapture={event => { if ((event.target as HTMLElement).closest(".poem-text")) event.stopPropagation(); }}>
           <BookEngine ref={bookRef} size={layout.size} leaves={layout.leaves} language={language} startPage={layout.startPage} reducedMotion={!!reducedMotion} onFlip={onFlip} onOrientation={setOrientation} onState={state => setTurning(state === "flipping" || state === "user_fold")} onChapter={onChapter} onNext={nextPage} onPrev={previousPage} />

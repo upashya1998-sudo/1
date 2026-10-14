@@ -6,16 +6,20 @@ interface ToolbarProps {
   language: Language; onLanguage: (language: Language) => void;
   onContents: () => void; onClose: () => void; closed: boolean; turning: boolean;
   soundAvailable: boolean; soundOn: boolean; onSound: () => void;
+  systemReducedMotion: boolean; reducedMotion: boolean; onMotion: () => void;
 }
 
-export function BookToolbar({ language, onLanguage, onContents, onClose, closed, turning, soundAvailable, soundOn, onSound }: ToolbarProps) {
+export function BookToolbar({ language, onLanguage, onContents, onClose, closed, turning, soundAvailable, soundOn, onSound, systemReducedMotion, reducedMotion, onMotion }: ToolbarProps) {
   return <div className="book-toolbar">
     <div className={`toolbar-tools ${closed ? "tools-hidden" : ""}`}>
       <button type="button" onClick={onContents} disabled={closed || turning} className="icon-control" aria-label="Table of contents" title="Contents"><Library size={17} strokeWidth={1.3} /></button>
       <button type="button" onClick={onClose} disabled={closed || turning} className="icon-control" aria-label="Close the book" title="Close the book"><BookOpen size={17} strokeWidth={1.3} /></button>
     </div>
     <LanguageSelector language={language} onChange={onLanguage} disabled={turning} />
-    <button type="button" onClick={onSound} disabled={!soundAvailable} aria-pressed={soundOn} className="icon-control sound-control" aria-label={soundAvailable ? (soundOn ? "Mute page sounds" : "Enable page sounds") : "Page sounds unavailable for this edition"} title={soundAvailable ? (soundOn ? "Mute page sounds" : "Enable page sounds") : "Page sounds unavailable for this edition"}>{soundOn ? <Volume2 size={17} strokeWidth={1.3} /> : <VolumeX size={17} strokeWidth={1.3} />}</button>
+    <div className="toolbar-right">
+      {systemReducedMotion && <button type="button" onClick={onMotion} aria-pressed={!reducedMotion} className="icon-control motion-control" aria-label={reducedMotion ? "Enable page animations" : "Use your device’s reduced-motion setting"} title={reducedMotion ? "Enable page animations" : "Use your device’s reduced-motion setting"}>Animate</button>}
+      <button type="button" onClick={onSound} disabled={!soundAvailable} aria-pressed={soundOn} className="icon-control sound-control" aria-label={soundAvailable ? (soundOn ? "Mute page sounds" : "Enable page sounds") : "Page sounds unavailable for this edition"} title={soundAvailable ? (soundOn ? "Mute page sounds" : "Enable page sounds") : "Page sounds unavailable for this edition"}>{soundOn ? <Volume2 size={17} strokeWidth={1.3} /> : <VolumeX size={17} strokeWidth={1.3} />}</button>
+    </div>
   </div>;
 }
 
